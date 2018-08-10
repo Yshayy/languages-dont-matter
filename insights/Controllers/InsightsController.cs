@@ -27,7 +27,7 @@ namespace Insights.Controllers
                     to: new EmailAddress(deviceSnapshot.OwnerEmail),
                     subject: "Your battery is running low",
                     plainTextContent: $"Your battery is only at {deviceSnapshot.BatteryLevel}",
-                    htmlContent: "<strong>Your battery is only at {deviceSnapshot.BatteryLevel}</strong>"
+                    htmlContent: $"<strong>Your battery is only at {deviceSnapshot.BatteryLevel}</strong>"
                 ));
             }
         }
