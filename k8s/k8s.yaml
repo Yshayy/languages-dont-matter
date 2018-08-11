@@ -1,0 +1,40 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: demo
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: demo
+  name: insights
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: insights
+  template:
+    metadata:
+      labels:
+        app: insights
+    spec:
+      containers:
+      - name: insights
+        image: insights
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 80
+      - name: dqd
+        image: soluto/dqd
+        env:
+          - name: STORAGE_ACCOUNT
+            value: --
+          - name: QUEUE_NAME
+            value: --
+          - name: SAS_TOKEN
+            value: --
+          - name: ERROR_SAS_TOKEN
+            value: --
+          - name: ENDPOINT
+            value: http://localhost/api/insights
