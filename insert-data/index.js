@@ -1,13 +1,12 @@
 var azure = require('azure-storage');
 require('dotenv').config()
 
-const url ="https://testdqd.queue.core.windows.net";
-var queueService = azure.createQueueServiceWithSas(url, process.env.SAS_TOKEN);
+var queueService = azure.createQueueServiceWithSas(process.env.STORAGE_ACCOUNT_URL, process.env.SAS_TOKEN);
 queueService.messageEncoder = new azure.QueueMessageEncoder.TextBase64QueueMessageEncoder();
 for (let i=0; i<1; i++){
-queueService.createMessage('test', JSON.stringify({
+queueService.createMessage('languages-dont-matter-anymore', JSON.stringify({
     "batteryLevel": 50,
-    "ownerEmail": "yshayy@mailniator.com"
+    "ownerEmail": "languages-dont-matter-anymore@mailinator.com"
 }) , function(error, b) {
   if (error) {
       console.error(error);
