@@ -21,14 +21,17 @@ namespace Insights.Controllers
         [HttpPost]
         public async Task Post([FromBody] DeviceSnapshot deviceSnapshot)
         {
-            if (deviceSnapshot.BatteryLevel < 100){
-                await _sendgridClient.SendEmailAsync(MailHelper.CreateSingleEmail(
+            Console.WriteLine("Got Device snapshot message");
+            if (deviceSnapshot.BatteryLevel < 60){
+                Console.WriteLine("Battery is lower than recommended threshold");
+                var response = await _sendgridClient.SendEmailAsync(MailHelper.CreateSingleEmail(
                     from: new EmailAddress("test@example.com"),
                     to: new EmailAddress(deviceSnapshot.OwnerEmail),
                     subject: "Your battery is running low",
                     plainTextContent: $"Your battery is only at {deviceSnapshot.BatteryLevel}",
                     htmlContent: $"<strong>Your battery is only at {deviceSnapshot.BatteryLevel}</strong>"
                 ));
+                Console.WriteLine("Email was sent successfully");
             }
         }
 

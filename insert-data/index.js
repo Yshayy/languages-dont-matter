@@ -6,7 +6,8 @@ queueService.messageEncoder = new azure.QueueMessageEncoder.TextBase64QueueMessa
 for (let i=0; i<1; i++){
 queueService.createMessage('languages-dont-matter-anymore', JSON.stringify({
     "batteryLevel": 50,
-    "ownerEmail": "languages-dont-matter-anymore@mailinator.com"
+    "ownerEmail": "languages-dont-matter-anymore@mytrashmail.com"
+    //"ownerEmail": "languages-dont-matter-anymore@mailinator.com"
 }) , function(error, b) {
   if (error) {
       console.error(error);
